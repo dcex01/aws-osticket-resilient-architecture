@@ -1,0 +1,51 @@
+# ==========================================
+# Terraform
+# ==========================================
+
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfplan
+tfplan*
+crash.log
+crash.*.log
+
+# Real environment variables - NEVER COMMIT
+**/terraform.tfvars
+**/*.auto.tfvars
+
+# Keep sanitized example files
+!**/terraform.tfvars.example
+
+# Terraform CLI configuration
+.terraformrc
+terraform.rc
+
+# ==========================================
+# Secrets / credentials
+# ==========================================
+
+*.pem
+*.key
+*.p12
+*.pfx
+.env
+.env.*
+!.env.example
+
+# ==========================================
+# IDE / OS
+# ==========================================
+
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# Temporary files
+# ==========================================
+
+*.log
+*.tmp
+*.bak

@@ -1,0 +1,18 @@
+aws_region   = "us-east-1"
+project_name = "helpdesk"
+environment  = "dev"
+
+vpc_cidr = "10.10.0.0/16"
+
+app_port          = 80
+ecs_instance_type = "t3.small"
+
+admin_email               = "your-email@example.com"
+grafana_smtp_from_address = "your-verified-ses-email@example.com"
+
+grafana_smtp_secret_arn     = "arn:aws:secretsmanager:us-east-1:123456789012:secret:helpdesk-dev/grafana/smtp-XXXXXX"
+grafana_database_secret_arn = "arn:aws:secretsmanager:us-east-1:123456789012:secret:helpdesk-dev/grafana/database-XXXXXX"
+
+grafana_database_host = "helpdesk-dev-mysql.xxxxxxxxxxxx.us-east-1.rds.amazonaws.com:3306"
+
+grafana_sns_topic_arn = "arn:aws:sns:us-east-1:123456789012:helpdesk-dev-grafana-alerts"

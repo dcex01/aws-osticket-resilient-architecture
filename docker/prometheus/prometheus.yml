@@ -1,0 +1,52 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+
+  - job_name: "prometheus"
+    static_configs:
+      - targets:
+          - "localhost:9090"
+
+  - job_name: "node-exporter"
+    ec2_sd_configs:
+      - region: us-east-1
+        port: 9100
+        filters:
+          - name: tag:aws:autoscaling:groupName
+            values:
+              - helpdesk-dev-ecs-asg
+
+    relabel_configs:
+      - source_labels: [__meta_ec2_private_ip]
+        regex: "(.*)"
+        target_label: __address__
+        replacement: "${1}:9100"
+
+      - source_labels: [__meta_ec2_instance_id]
+        target_label: instance_id
+
+      - source_labels: [__meta_ec2_availability_zone]
+        target_label: availability_zone
+
+  - job_name: "cadvisor"
+    ec2_sd_configs:
+      - region: us-east-1
+        port: 8080
+        filters:
+          - name: tag:aws:autoscaling:groupName
+            values:
+              - helpdesk-dev-ecs-asg
+
+    relabel_configs:
+      - source_labels: [__meta_ec2_private_ip]
+        regex: "(.*)"
+        target_label: __address__
+        replacement: "${1}:8080"
+
+      - source_labels: [__meta_ec2_instance_id]
+        target_label: instance_id
+
+      - source_labels: [__meta_ec2_availability_zone]
+        target_label: availability_zone
